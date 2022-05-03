@@ -3,6 +3,7 @@
 **Disclamer: Use at your own risk. Generated LC3 code may have unforseen bugs**
 
 ##Custom LC3 Commands
+
 | # | Command | Description | Example| C
 |-|-|-|
 |1.|`SUB`|Subtracts two Register|`SUB R1, R2, R3`| `R1 = R2 - R3`|
