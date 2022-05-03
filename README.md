@@ -1,70 +1,71 @@
-# Getting Started with Create React App
+# LC3 ASSEMBLY TEMPLATES
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Disclamer: Use at your own risk. Generated LC3 code may have unforseen bugs**
 
-## Available Scripts
+##Custom LC3 Commands
+| # | Command | Description | Example| C
+|-|-|-|
+|1.|`SUB`|Subtracts two Register|`SUB R1, R2, R3`| `R1 = R2 - R3`|
+|2.|`SUB`|Subtracts literal|`SUB R1, R2, 100`| `R1 = R2 - 100`|
+|3.|`BUILDSTACK`| Builds the stack with 1 or more local variable|`BUILDSTACK` or `BUILDSTACK 1` or `BUILDSTACK 3`| `None`|
+|4.|`TEARSTACK`| Tears the stack and returns value|`TEARSTACK R1` R1 holds return value| `return R1`|
+|5.|`IF`| Generates I statment without else| `IF R1 < R2 R3` R3 is destroyed |`if(R1 < R2){}`|
+|6.|`IFELSE`| Generates If else statment| `IFELSE R1 < R2 R3` R3 is destroyed |`if(R1 < R2){} else{}`|
+|7.|`WHILE`| Generates while leep| `WHILE R1 < R2 R3` R3 is destroyed |`while(R1 < R2){}`|
+|8.|`DOWHILE`| Generates do while leep| `DOWHILE R1 < R2 R3` R3 is destroyed |`do{} while(R1 < R2)`|
+|9.|`CALL`| Call a function| `CALL R1 FUNCT R2 R3` R1 is return R2, R3 are args |`R1 = FUNCT(R2, R3);`|
+|10.|`MOV`| moves variable | `MOV R1 R2` | `R1 = R2`|
+|11.|`ARG`| gets argument from stack | `ARG R1 1`| `none`|
+|12.|`LV`| gets local variable from stack | `LV R1 1` OR `LV 1 R1| `none`|
+|13.|`CLR`| clears a register | `CLR R1`| `R1 = 0`|
+|14.|`Set`| set register to value | `SET R1 10`| `R1 = 10`|
+|15.|`DEREF`| dereferences memory | `DEREF R2 R1`| `R2 = *R1`|
+|16.|`TYPEDEF`| names a register (experimental) | `TYPEDEF R1 TEST`| `none`|
 
-In the project directory, you can run:
+If statments and while statments can also take a code block below
+```
+IF R1 < R2 R3
+{
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+}
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+IFELSE R1 < R2 R3
+{
+;; IF True block
+}
+{
+;; ELSE block
+}
 
-### `npm test`
+WHILE R1 < R2 R3
+{
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+}
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Valid Comparisons are `<, <=, >, >=, ==, !=`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+##Notes
+1. Comma between arguments are optional. They will automatically be put in
+2. No Guarentee the code generated will work. For example, LDR R1 R2 10000000 will not work because the number is too large.
+3. Currently only works with decimal numbers can be passed as an argument
+4. \#, x, b, o can not be placed if front of numbers
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+##Built In LC3 commands
 
-### `npm run eject`
+###LC3 commands
+``TODO``
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+###Psudo commands
+| # | Command | Description | Example|
+| -  | - | - |
+|1.| `.ORIG`|Takes in an memory address|`.ORIG X300` |
+|3.|`.FILL`|Fill memory with value|`.FILL 21`|
+|4.|`.BLKW`|Allocate Block of memory|`.BLKW 100` |
+|5.|`.STRINGZ`| Set a null terminated string literal |`.STRINGZ "Hello World"`|
+|6.|`.END`|End of code|`.END`|
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+##License
+MIT LICENSE
