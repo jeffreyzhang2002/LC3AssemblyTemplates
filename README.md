@@ -1,6 +1,16 @@
 # LC3 ASSEMBLY TEMPLATES
 
+GITHUB PAGES LINK: https://jeffreyzhang2002.github.io/LC3AssemblyTemplates/
+
 **Disclamer: Use at your own risk. Generated LC3 code may have unforseen bugs**
+
+## USE
+
+LC3 assembly is a pain to program and debug in so I created so higher language constructs that will automatically be converted into LC3 assembly. 
+
+To use the code, simply right commands on the left panel, and the LC3 assembly code should be generated on the right panel. 
+
+Please note the generated code is not guaranteed to work for all cases. For example `LDR R1 R2 100000` will no be generated correctly because the offset is way to big. Certain instructions like `ADD` has been modified to take in very large numbers. `ADD R1 R2 100` will automatically be converted into a series of addition instructions.
 
 ## Custom LC3 Commands
 
@@ -29,20 +39,18 @@ If statments and while statments can also take a code block below
 IF R1 < R2 R3
 {
 
-
 }
 
 IFELSE R1 < R2 R3
 {
-;; IF True block
+  ;; IF True block
 }
 {
-;; ELSE block
+  ;; ELSE block
 }
 
 WHILE R1 < R2 R3
 {
-
 
 }
 ```
@@ -57,17 +65,20 @@ Valid Comparisons are `<, <=, >, >=, ==, !=`
 
 ## Built In LC3 commands
 
-###LC3 commands
+### LC3 commands
 ``TODO``
 
 ### Psudo commands
 | # | Command | Description | Example|
-| -  | - | - |
+| --- | --- | --- | --- |
 |1.| `.ORIG`|Takes in an memory address|`.ORIG X300` |
 |3.|`.FILL`|Fill memory with value|`.FILL 21`|
 |4.|`.BLKW`|Allocate Block of memory|`.BLKW 100` |
 |5.|`.STRINGZ`| Set a null terminated string literal |`.STRINGZ "Hello World"`|
 |6.|`.END`|End of code|`.END`|
 
-##License
+## License
 MIT LICENSE
+
+## ISSUES
+Please use the issues tab if there is any problem with the code
