@@ -2,9 +2,13 @@
 
 **Disclamer: Use at your own risk. Generated LC3 code may have unforseen bugs**
 
-##Custom LC3 Commands
+## Custom LC3 Commands
 
 
+| Command | Description |
+| --- | --- |
+| `git status` | List all *new or modified* files |
+| `git diff` | Show file differences that **haven't been** staged |
 
 | # | Command | Description | Example| C |
 | --- | --- | --- | --- |
@@ -50,18 +54,18 @@ WHILE R1 < R2 R3
 
 Valid Comparisons are `<, <=, >, >=, ==, !=`
 
-##Notes
+## Notes
 1. Comma between arguments are optional. They will automatically be put in
 2. No Guarentee the code generated will work. For example, LDR R1 R2 10000000 will not work because the number is too large.
 3. Currently only works with decimal numbers can be passed as an argument
 4. \#, x, b, o can not be placed if front of numbers
 
-##Built In LC3 commands
+## Built In LC3 commands
 
 ###LC3 commands
 ``TODO``
 
-###Psudo commands
+### Psudo commands
 | # | Command | Description | Example|
 | -  | - | - |
 |1.| `.ORIG`|Takes in an memory address|`.ORIG X300` |
