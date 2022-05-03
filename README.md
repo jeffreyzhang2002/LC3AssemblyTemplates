@@ -28,7 +28,7 @@ Please note the generated code is not guaranteed to work for all cases. For exam
 |9.|`CALL`| Call a function| `CALL R1 FUNCT R2 R3` R1 is return R2, R3 are args |`R1 = FUNCT(R2, R3);`|
 |10.|`MOV`| moves variable | `MOV R1 R2` | `R1 = R2`|
 |11.|`ARG`| gets argument from stack | `ARG R1 1`| `none`|
-|12.|`LV`| gets local variable from stack | `LV R1 1` OR `LV 1 R1| `none`|
+|12.|`LV`| gets local variable from stack | `LV R1 1` OR `LV 1 R`| `none`|
 |13.|`CLR`| clears a register | `CLR R1`| `R1 = 0`|
 |14.|`Set`| set register to value | `SET R1 10`| `R1 = 10`|
 |15.|`DEREF`| dereferences memory | `DEREF R2 R1`| `R2 = *R1`|
