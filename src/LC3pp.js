@@ -12,19 +12,39 @@ LC3pp.set("HELP", (data) => {return ";; https://github.com/jeffreyzhang2002/LC3A
 
 LC3pp.set("DEBUG", (data) => {return ";; https://wchargin.com/lc3web/#"})
 
+LC3pp.set("MULT", (data)=> {
+    const error = validateArgs(data, 4, "SUB [DEST] [SRC] [LIT]",
+        ["CMD", "REG", "REG", "LIT"]);
+    if(error) { return error; }
+
+    if(data.tokens[1] == data.tokens[2]) {
+        return ";; REGISTER CAN NOT BE THE SAME"
+    }
+
+    let output = `;; ======${data.line}======\n`
+               + `AND ${data.tokens[1]}, ${data.tokens[1]}, 0\n`;
+
+    for(let i = +data.tokens[3]; i > 0; i--) {
+        output += `ADD ${data.tokens[1]}, ${data.tokens[1]}, ${data.tokens[2]}\n`
+    }
+
+    output += ";; ======" + "=".repeat(data.line.length) + "======\n";
+    return output;
+})
+
 LC3pp.set("SUB", (data) => {
     const error = validateArgs(data, 4, "SUB [DEST] [SRC] [SRC/LIT]",
         ["CMD", "REG", "REG", ["REG", "LIT"]]);
     if(error) { return error; }
 
     if(!+data.tokens[3] || (+data.tokens[3] <= 15 && +data.tokens[3] >= -16) ) {
-        return `======${data.line}======\n`
+        return `;; ======${data.line}======\n`
             +  `NOT ${data.tokens[3]}, ${data.tokens[3]}\n`
             +  `ADD ${data.tokens[3]}, ${data.tokens[3]}, 1\n`
             +  `ADD ${data.tokens[1]}, ${data.tokens[2]}, ${data.tokens[3]}\n`
             +  `NOT ${data.tokens[3]}, ${data.tokens[3]}\n`
             +  `ADD ${data.tokens[3]}, ${data.tokens[3]}, 1\n`
-            +   "======" + "=".repeat(data.line.length) + "======";
+            +   ";; ======" + "=".repeat(data.line.length) + "======";
     } else  {
         let amount;
         let output = `;; ======${data.line}======\n`
