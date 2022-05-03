@@ -97,7 +97,7 @@ export function convertCompare(cmp) {
         case "<=":
             return "BRNZ";
         case ">=":
-            return "BRNP";
+            return "BRZP";
     }
 }
 

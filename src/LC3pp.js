@@ -156,29 +156,17 @@ LC3pp.set("BUILDSTACK", (data) => {
         ["CMD"])
     if(error) { return error }
 
-    let localVarCount = (+data.tokens[1]) > 1? (+data.tokens[1]) : 1;
-    let localVar = ""
-
-    while(localVarCount > 16) {
-        localVar += "ADD R6, R6, -16\n";
-        localVarCount -= 16;
-    }
-
-    if(localVarCount > 0) {
-        localVar += `ADD R6, R6, -${localVarCount}\n`;
-    }
-
     return `;; ======${data.line}======\n`
         +  "ADD R6, R6, -4 \n"
         +  "STR R7, R6, #2 \n"
         +  "STR R5, R6, #1 \n"
         +  "ADD R5, R6, #0 \n"
-        +  localVar
-        +  "STR R0, R6, #0\n"
-        +  "STR R1, R6, -1\n"
-        +  "STR R1, R6, -2\n"
-        +  "STR R1, R6, -3\n"
-        +  "STR R1, R6, -4\n"
+        +  `ADD R6, R6, -${((+data.tokens[1]) > 1? (+data.tokens[1]) : 1) + 4}\n`
+        +  "STR R0, R6, #4\n"
+        +  "STR R1, R6, #3\n"
+        +  "STR R2, R6, #2\n"
+        +  "STR R3, R6, #1\n"
+        +  "STR R4, R6, #0\n"
         +  `;; ======${"=".repeat(data.line.length)}======\n`;
 })
 
@@ -190,12 +178,11 @@ LC3pp.set("TEARSTACK", (data) => {
 
     return `;; ======${data.line}======\n`
         +  `STR ${data.tokens[1]}, R5, #3\n`
-        +  "ADD R6, R6, #4\n"
-        +  "LDR R0, R6, #0\n"
-        +  "LDR R1, R6, -1\n"
-        +  "LDR R2, R6, -2\n"
-        +  "LDR R3, R6, -3\n"
-        +  "LDR R4, R6, -4\n"
+        +  "LDR R4, R6, #0\n"
+        +  "LDR R3, R6, #1\n"
+        +  "LDR R2, R6, #2\n"
+        +  "LDR R1, R6, #3\n"
+        +  "LDR R0, R6, #4\n"
         +  "ADD R6, R5, #0\n"
         +  "LDR R5, R6, #1\n"
         +  "LDR R7, R6, #2\n"
@@ -216,19 +203,18 @@ LC3pp.set("CALL", (data) => {
     let output = `;; ======${data.line}======\n` +
                  `ADD R6, R6, -${argCount}\n`
 
+    let j = 0;
     for(let i = 3; i < data.tokens.length; i++) {
         const reg = alias.get(data.tokens[i]);
-
-        if(!reg) {
+        if(!reg)
             return `;; UNEXPECTED VAL => ${data.tokens[i]}`
-        }
 
-        output += `STR ${reg}, R6, ${i}\n`
+        output += `STR ${reg}, R6, ${j++}\n`
     }
 
     output += `JSR ${data.tokens[2]}\n`
             + `LDR ${data.tokens[1]}, R6, 0\n`
-            + `ADD R6, R6, ${argCount + 1}\n\n`
+            + `ADD R6, R6, ${argCount + 1}\n`
             +  `;; ======${"=".repeat(data.line.length)}======\n`;
     return output;
 })

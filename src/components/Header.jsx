@@ -22,8 +22,16 @@ const Doc = Styled.div`
     flex-direction: column;
     justify-content: center;
     
-    &:hover{
-        color: orange;
+   
+   
+    & a {
+    
+    color: white;
+    
+         &:hover{
+            color: orange;
+        }
+    
     }
 `
 
@@ -38,8 +46,14 @@ const About = Styled.div`
     
     align-items: flex-end;
     
-    &:hover{
-        color: orange;
+    & a {
+    
+    color: white;
+    
+         &:hover{
+            color: orange;
+        }
+    
     }
 `
 
@@ -57,9 +71,9 @@ export default class Header extends React.Component{
     render() {
         return (
             <Container>
-                <Doc> Documentation </Doc>
+                <Doc><a href={"https://github.com/jeffreyzhang2002/LC3AssemblyTemplates/blob/master/README.md"} target={"_blank"}>Documentation</a></Doc>
                 <Title> LC3 Assembly Templates </Title>
-                <About> Github </About>
+                <About><a href={"https://github.com/jeffreyzhang2002/LC3AssemblyTemplates"} target={"_blank"}> GitHub </a></About>
             </Container>
         );
     }
