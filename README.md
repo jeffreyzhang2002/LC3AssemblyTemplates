@@ -82,3 +82,6 @@ MIT LICENSE
 
 ## ISSUES
 Please use the issues tab if there is any problem with the code
+
+## RESOURCES
+Testing assembly: https://wchargin.com/lc3web/#
