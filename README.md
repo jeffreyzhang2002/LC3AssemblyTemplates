@@ -5,13 +5,8 @@
 ## Custom LC3 Commands
 
 
-| Command | Description |
-| --- | --- |
-| `git status` | List all *new or modified* files |
-| `git diff` | Show file differences that **haven't been** staged |
-
-| # | Command | Description | Example| C |
-| --- | --- | --- | --- |
+|  #  | Command | Description | EXAMPLE | C |
+| --- | --- | --- | --- | --- |
 |1.|`SUB`|Subtracts two Register|`SUB R1, R2, R3`| `R1 = R2 - R3`|
 |2.|`SUB`|Subtracts literal|`SUB R1, R2, 100`| `R1 = R2 - 100`|
 |3.|`BUILDSTACK`| Builds the stack with 1 or more local variable|`BUILDSTACK` or `BUILDSTACK 1` or `BUILDSTACK 3`| `None`|
