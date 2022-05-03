@@ -115,6 +115,8 @@ function convertArgs(data, index, action) {
 
         case "LAB":
         case "LABEL":
+            if(data.tokens[index] == "0")
+                return true;
             return +data.tokens[index] || alias.has(data.tokens[index]);
 
         case "CMD":

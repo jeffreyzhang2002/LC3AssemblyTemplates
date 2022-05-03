@@ -8,6 +8,10 @@ import LC3 from "./LC3";
 
 const LC3pp = new Map();
 
+LC3pp.set("HELP", (data) => {return ";; https://github.com/jeffreyzhang2002/LC3AssemblyTemplates/blob/master/README.md"})
+
+LC3pp.set("DEBUG", (data) => {return ";; https://wchargin.com/lc3web/#"})
+
 LC3pp.set("SUB", (data) => {
     const error = validateArgs(data, 4, "SUB [DEST] [SRC] [SRC/LIT]",
         ["CMD", "REG", "REG", ["REG", "LIT"]]);
@@ -124,11 +128,13 @@ LC3pp.set("WHILE", (data) => {
     const body = data.children.length? transform(data.children[0]) : ";; CODE IF TRUE\n"
     return `;; ======${data.line}======\n`
         +  ";; Setting NZP WITH 2's Complement\n"
+        +  `BEGIN_WHILE_${getLabelCount()}\n`
         +  `NOT ${data.tokens[4]}, ${data.tokens[3]}\n`
         +  `ADD ${data.tokens[4]}, ${data.tokens[4]}, 1\n`
         +  `ADD ${data.tokens[4]}, ${data.tokens[1]}, ${data.tokens[4]}\n`
         +  `${convertCompare(invertCompare(data.tokens[2]))} END_WHILE_${getLabelCount()}\n\n`
         +  `${body}\n`
+        +   `BRNZP BEGIN_WHILE_${getLabelCount()}\n`
         +  `END_WHILE_${incrementLabelCount()}\n`
         +  `;; ======${"=".repeat(data.line.length)}======\n`;
 })
@@ -260,9 +266,9 @@ LC3pp.set("LV", (data) => {
         return `;; ERR MUST BE LV [REG] [LIT] or LV [LIT] [REG]`;
     }
 
-    let cmd = `STR ${data.tokens[2]}, R5, ${data.tokens[1]}\n`;
+    let cmd = `STR ${data.tokens[2]}, R5, ${-(data.tokens[1] - 1)}\n`;
     if(data.tokens[1][0] == "R") {
-        cmd = `LDR ${data.tokens[1]}, R5, ${data.tokens[2]}\n`;
+        cmd = `LDR ${data.tokens[1]}, R5, ${-(data.tokens[2] - 1)}\n`;
     }
 
     return `;; ======${data.line}======\n`
@@ -286,5 +292,16 @@ LC3pp.set("TYPEDEF", (data) => {
     return `;; ${data.tokens[2]} is ${data.tokens[1]}`
 })
 
+LC3pp.set("ARR", (data) => {
+    const error = validateArgs(data, 3, "ARR [REG] [REG|LABEL] [LIT]", ["CMD", "REG", ["REG","LABEL"], "LIT"]);
+    if(error) {return error; }
+
+    let output = `;; ======${data.line}======\n`;
+
+    if (!data.tokens[2][0] == "R" || !+data.tokens[2][1])
+        output += `LEA ${data.tokens[1]}, ${data.tokens[2]}\n`;
+
+    return output + `LDR ${data.tokens[1]}, ${data.tokens[1]}, ${data.tokens[3]}\n` + `;; ======${"=".repeat(data.line.length)}======\n`;
+})
 
 export default LC3pp;
