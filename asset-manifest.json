@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/LC3AssemblyTemplates/static/css/main.d7dad4dd.css",
-    "main.js": "/LC3AssemblyTemplates/static/js/main.03c51145.js",
+    "main.js": "/LC3AssemblyTemplates/static/js/main.ff55192f.js",
     "index.html": "/LC3AssemblyTemplates/index.html",
     "main.d7dad4dd.css.map": "/LC3AssemblyTemplates/static/css/main.d7dad4dd.css.map",
-    "main.03c51145.js.map": "/LC3AssemblyTemplates/static/js/main.03c51145.js.map"
+    "main.ff55192f.js.map": "/LC3AssemblyTemplates/static/js/main.ff55192f.js.map"
   },
   "entrypoints": [
     "static/css/main.d7dad4dd.css",
-    "static/js/main.03c51145.js"
+    "static/js/main.ff55192f.js"
   ]
 }
