@@ -12,8 +12,15 @@ LC3pp.set("HELP", (data) => {return ";; https://github.com/jeffreyzhang2002/LC3A
 
 LC3pp.set("DEBUG", (data) => {return ";; https://wchargin.com/lc3web/#"})
 
+LC3pp.set("GOTO", (data) => {
+    const error = validateArgs(data, 2, "GOTO [DEST] [LABEL]", ["CMD", "LABEL"]);
+    if(error) {return error;}
+
+    return `BRNZP ${data.tokens[1]}`;
+})
+
 LC3pp.set("MULT", (data)=> {
-    const error = validateArgs(data, 4, "SUB [DEST] [SRC] [LIT]",
+    const error = validateArgs(data, 4, "MULT [DEST] [SRC] [LIT]",
         ["CMD", "REG", "REG", "LIT"]);
     if(error) { return error; }
 
